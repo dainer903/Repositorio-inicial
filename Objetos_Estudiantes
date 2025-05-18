@@ -1,0 +1,59 @@
+class person:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+        self.notas = []
+
+    def saludar(self):
+        print(f"Hola, soy {self.nombre} y tengo {self.edad} años.")
+
+    def agregar_nota(self, nota):
+        self.notas.append(nota)
+
+    def mostrar_notas(self):
+        if self.notas:
+            print(f"Notas de {self.nombre}: {', '.join(map(str, self.notas))}")
+        else:
+            print(f"{self.nombre} no tiene notas.")
+
+    def promedio(self):
+        if self.notas:
+            return sum(self.notas) / len(self.notas)
+        else:
+            return 0
+
+    def resultado(self):
+        promedio = self.promedio()
+        if promedio >= 3.0:
+            print(f"✅ {self.nombre} Aprobó con promedio {promedio:.2f}\n")
+        else:
+            print(f"❌ {self.nombre} No aprobó. Promedio: {promedio:.2f}\n")
+
+class estudiante(person):
+    def __init__(self, nombre, edad, carrera):
+        super().__init__(nombre, edad)
+        self.carrera = carrera
+
+    def mostrar_carrera(self):
+        print(f"Estoy estudiando {self.carrera}.")
+
+if __name__ == "__main__":
+    # Crear al menos 5 estudiantes
+    estudiantes = [
+        estudiante("Ana", 18, "Ingeniería"),
+        estudiante("Luis", 19, "Matemáticas"),
+        estudiante("Valeria", 20, "Derecho"),
+        estudiante("Carlos", 22, "Administración"),
+        estudiante("María", 21, "Medicina")
+    ]
+
+    # Recorrer estudiantes, que saluden y muestren su carrera
+    for est in estudiantes:
+        est.saludar()
+        est.mostrar_carrera()
+        # Agregar 3 notas a cada uno
+        est.agregar_nota(3.5)
+        est.agregar_nota(4.0)
+        est.agregar_nota(2.8)
+        est.mostrar_notas()
+        est.resultado()
